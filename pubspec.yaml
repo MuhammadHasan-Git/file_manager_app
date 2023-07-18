@@ -41,6 +41,8 @@ dependencies:
   blurrycontainer: ^1.0.2
   animate_do: ^3.0.2
   flutter_svg: ^2.0.7
+  cached_network_image: ^3.2.3
+  animated_icon: ^0.0.5
 
 dev_dependencies:
   flutter_test:

@@ -1,3 +1,4 @@
+import 'package:file_manager_app/pages/files_page.dart';
 import 'package:file_manager_app/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -49,14 +50,7 @@ class _RootAppState extends State<RootApp> {
       index: pageIndex,
       children: const [
         HomePage(),
-        Center(
-            child: Text(
-          "Files Page",
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-          ),
-        )),
+        FilesPage(),
         Center(
             child: Text(
           "Trash Page",

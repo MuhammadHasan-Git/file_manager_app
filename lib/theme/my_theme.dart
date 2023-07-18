@@ -9,16 +9,18 @@ class MyTheme {
               bodyColor: Colors.blueAccent,
               displayColor: white,
             ),
-        cardColor: const Color(0xFF7fff00),
+        cardColor: Colors.blueAccent,
+        canvasColor: const Color(0xFF7fff00),
         primaryColor: const Color(0xFF121212),
       );
   static lightTheme(BuildContext context) => ThemeData(
         scaffoldBackgroundColor: white,
         textTheme: Theme.of(context).textTheme.apply(
-              bodyColor: black,
+              bodyColor: secondary.withOpacity(0.8),
               displayColor: white,
             ),
         primaryColor: white,
-        cardColor: const Color(0xFF4beade),
+        canvasColor: const Color(0xFF4beade),
+        cardColor: secondary,
       );
 }
