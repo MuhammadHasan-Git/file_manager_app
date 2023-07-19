@@ -1,5 +1,7 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:file_manager_app/pages/file_detail_page.dart';
 import 'package:flutter/material.dart';
+import '../data/category_json.dart';
 
 class FilesPage extends StatefulWidget {
   const FilesPage({super.key});
@@ -20,6 +22,7 @@ class _FilesPageState extends State<FilesPage> {
   Widget getBody() {
     return SafeArea(
         child: SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
       padding: const EdgeInsets.all(15),
       child: Column(
         children: [
@@ -27,6 +30,14 @@ class _FilesPageState extends State<FilesPage> {
             height: 20,
           ),
           getTabs(),
+          const SizedBox(
+            height: 30,
+          ),
+          getDataSection(),
+          const SizedBox(
+            height: 20,
+          ),
+          pageIndex == 0 ? getMyCloudItems() : getTeamCloudItems(),
         ],
       ),
     ));
@@ -54,8 +65,6 @@ class _FilesPageState extends State<FilesPage> {
                         child: ElevatedButton(
                           style: ButtonStyle(
                             elevation: const MaterialStatePropertyAll(6),
-                            backgroundColor: MaterialStatePropertyAll(
-                                Theme.of(context).cardColor.withOpacity(0.9)),
                             shape: MaterialStatePropertyAll(
                               RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(12)),
@@ -110,8 +119,6 @@ class _FilesPageState extends State<FilesPage> {
                         child: ElevatedButton(
                           style: ButtonStyle(
                             elevation: const MaterialStatePropertyAll(6),
-                            backgroundColor: MaterialStatePropertyAll(
-                                Theme.of(context).cardColor),
                             shape: MaterialStatePropertyAll(
                               RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(12)),
@@ -157,6 +164,139 @@ class _FilesPageState extends State<FilesPage> {
                 ),
         ],
       ),
+    );
+  }
+
+  Widget getDataSection() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Row(
+          children: [
+            const Text(
+              "Data Modified",
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            const SizedBox(
+              width: 2,
+            ),
+            Icon(
+              Icons.arrow_downward,
+              color: Theme.of(context).cardColor,
+              size: 20,
+            ),
+          ],
+        ),
+        IconButton(
+          splashRadius: 20,
+          onPressed: () {},
+          icon: Icon(
+            Icons.border_all,
+            color: Theme.of(context).cardColor.withOpacity(0.5),
+          ),
+        )
+      ],
+    );
+  }
+
+  Widget getMyCloudItems() {
+    var size = MediaQuery.of(context).size;
+    return Wrap(
+      runSpacing: 20,
+      spacing: 20,
+      children: List.generate(myCloudFilesContentJson.length, (index) {
+        return GestureDetector(
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (_) => FileDetailPage(
+                        title: myCloudFilesContentJson[index]['title'],
+                        fileCount: myCloudFilesContentJson[index]
+                            ['file_count'])));
+          },
+          child: Container(
+            width: (size.width - 50) / 2,
+            height: (size.width - 50) / 2,
+            decoration: BoxDecoration(
+              color: Theme.of(context).cardColor.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(
+                  myCloudFilesContentJson[index]['img'],
+                  width: 55,
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                Text(
+                  myCloudFilesContentJson[index]['title'] +
+                      "( ${myCloudFilesContentJson[index]['file_count']} )",
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  ),
+                )
+              ],
+            ),
+          ),
+        );
+      }),
+    );
+  }
+
+  Widget getTeamCloudItems() {
+    var size = MediaQuery.of(context).size;
+    return Wrap(
+      runSpacing: 20,
+      spacing: 20,
+      children: List.generate(teamCloudFilesContentJson.length, (index) {
+        return GestureDetector(
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (_) => FileDetailPage(
+                        title: teamCloudFilesContentJson[index]['title'],
+                        fileCount: teamCloudFilesContentJson[index]
+                            ['file_count'])));
+          },
+          child: Container(
+            width: (size.width - 50) / 2,
+            height: (size.width - 50) / 2,
+            decoration: BoxDecoration(
+              color: Theme.of(context).cardColor.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(
+                  teamCloudFilesContentJson[index]['img'],
+                  width: 55,
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                Text(
+                  teamCloudFilesContentJson[index]['title'] +
+                      "( ${teamCloudFilesContentJson[index]['file_count']} )",
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  ),
+                )
+              ],
+            ),
+          ),
+        );
+      }),
     );
   }
 }

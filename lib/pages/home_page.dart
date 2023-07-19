@@ -18,7 +18,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   bool isplay = false;
-  String? url;
+
   bool isSyncing = false;
   @override
   Widget build(BuildContext context) {
@@ -205,7 +205,7 @@ class _HomePageState extends State<HomePage> {
                         width: size.width * 0.6,
                         height: 160,
                         child: CachedNetworkImage(
-                          imageUrl: url = recentFilesJson[index]['img'],
+                          imageUrl: recentFilesJson[index]['img'],
                           imageBuilder: (context, imageProvider) => Container(
                             width: size.width * 0.6,
                             height: 160,
@@ -231,9 +231,7 @@ class _HomePageState extends State<HomePage> {
                                 height: 70,
                                 width: 70,
                                 // ignore: unnecessary_null_comparison
-                                animateIcon: url == null
-                                    ? AnimateIcons.download
-                                    : AnimateIcons.checkmarkOk,
+                                animateIcon: AnimateIcons.cloud,
                                 color: Colors.blueAccent,
                               ),
                             ),
