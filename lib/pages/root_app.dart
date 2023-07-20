@@ -1,3 +1,4 @@
+import 'package:file_manager_app/pages/account_page.dart';
 import 'package:file_manager_app/pages/files_page.dart';
 import 'package:file_manager_app/pages/home_page.dart';
 import 'package:flutter/material.dart';
@@ -59,14 +60,7 @@ class _RootAppState extends State<RootApp> {
             fontWeight: FontWeight.bold,
           ),
         )),
-        Center(
-            child: Text(
-          "Account Page",
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-          ),
-        )),
+        AccountPage(),
       ],
     );
   }
